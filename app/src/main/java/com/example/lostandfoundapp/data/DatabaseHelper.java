@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         String CREATE_USER_TABLE = "CREATE TABLE " + Util.TABLE_NAME + "(" + String.valueOf(Util.ITEM_ID) + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                        + Util.TYPE + " TEXT," + Util.NAME + " TEXT," + Util.PHONE + " TEXT," + Util.DESCRIPTION + " TEXT," + Util.DATE + " TEXT," + Util.LOCATION + " TEXT)";
+                                        + Util.TYPE + " TEXT," + Util.NAME + " TEXT," + Util.PHONE + " TEXT," + Util.DESCRIPTION + " TEXT," + Util.DATE + " TEXT," + Util.LOCATION + " TEXT," + Util.LATITUDE + " REAL," + Util.LONGITUDE + " REAL)";
         sqLiteDatabase.execSQL(CREATE_USER_TABLE);
     }
 
@@ -47,6 +47,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Util.DESCRIPTION, item.getDescription());
         contentValues.put(Util.DATE, item.getDate());
         contentValues.put(Util.LOCATION, item.getLocation());
+        contentValues.put(Util.LATITUDE,item.getLatitude());
+        contentValues.put(Util.LONGITUDE, item.getLongitude());
         long newRowId = db.insert(Util.TABLE_NAME, null, contentValues);
         db.close();
         return newRowId;
@@ -69,12 +71,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 item.setDescription(cursor.getString(cursor.getColumnIndex(Util.DESCRIPTION)));
                 item.setDate(cursor.getString(cursor.getColumnIndex(Util.DATE)));
                 item.setLocation(cursor.getString(cursor.getColumnIndex(Util.LOCATION)));
+                item.setLatitude(cursor.getDouble(cursor.getColumnIndex(Util.LATITUDE)));
+                item.setLongitude(cursor.getDouble(cursor.getColumnIndex(Util.LONGITUDE)));
                 itemList.add(item);
 
             } while (cursor.moveToNext());
         }
         return itemList;
     }
+
 
     public long deleteItem(String type, String name) {
         SQLiteDatabase db = this.getWritableDatabase();

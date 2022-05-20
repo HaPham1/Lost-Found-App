@@ -13,4 +13,7 @@
     <string name="location">Location:</string>
     <string name="lost_found_items"><![CDATA[LOST & FOUND ITEMS]]></string>
     <string name="remove">REMOVE</string>
+    <string name="get_current_location">GET CURRENT LOCATION</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="show_on_map">SHOW ON MAP</string>
 </resources>

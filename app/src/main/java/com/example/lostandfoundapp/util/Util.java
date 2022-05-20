@@ -2,7 +2,7 @@ package com.example.lostandfoundapp.util;
 
 public class Util {
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "item_db";
     public static final String TABLE_NAME = "items";
 
@@ -13,5 +13,7 @@ public class Util {
     public static final String DESCRIPTION = "description";
     public static final String DATE = "date";
     public static final String LOCATION = "location";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
 
 }
