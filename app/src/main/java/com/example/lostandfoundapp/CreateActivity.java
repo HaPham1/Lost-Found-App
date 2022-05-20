@@ -44,6 +44,7 @@ public class CreateActivity extends AppCompatActivity {
     Double latitude = 0.0;
     Double longitude = 0.0;
     String API_KEY = "AIzaSyDQ3mmN_mrJWQ1s5avPHjmmZJDH1YPWl9w";
+    boolean first = true;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -60,6 +61,7 @@ public class CreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+
 
         Lost = findViewById(R.id.Lost);
         Found = findViewById(R.id.Found);
@@ -88,9 +90,12 @@ public class CreateActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                locationText.setText(location.getLatitude() + ", " + location.getLongitude());
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
+                if (first) {
+                    locationText.setText(location.getLatitude() + ", " + location.getLongitude());
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    first = false;
+                }
             }
         };
 
